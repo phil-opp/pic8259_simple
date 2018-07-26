@@ -19,6 +19,7 @@
 //! different base interrupts, because DOS used interrupt 0x21 for system
 //! calls.
 
+#![warn(missing_docs)]
 #![feature(const_fn)]
 #![no_std]
 
