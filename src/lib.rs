@@ -27,7 +27,8 @@ extern crate x86_64;
 
 use x86_64::instructions::port::Port;
 
-pub const TIMER_INTERRUPT: u8 = PIC_1_OFFSET;
+/// The interrupt ID for the timer interrupt.
+pub const TIMER_INTERRUPT_ID: u8 = PIC_1_OFFSET;
 
 const PIC_1_OFFSET: u8 = 0x20;
 const PIC_2_OFFSET: u8 = 0x28;
