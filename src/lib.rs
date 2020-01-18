@@ -37,6 +37,18 @@ const PIC_2_OFFSET: u8 = 0x28;
 /// time, because it's traditional to do so, and because I/O operations
 /// might not be instantaneous on older processors.
 pub unsafe fn initialize() {
+    internal_initialize_with_mask(None, None)
+}
+
+/// Initialize both our PICs.  We initialize them together, at the same
+/// time, because it's traditional to do so, and because I/O operations
+/// might not be instantaneous on older processors.
+/// The PICs are initialized with the provided masks rather than defaults.
+pub unsafe fn initialize_with_mask(pic1_mask: u8, pic2_mask: u8) {
+    internal_initialize_with_mask(Some(pic1_mask), Some(pic2_mask));
+}
+
+unsafe fn internal_initialize_with_mask(pic1_mask: Option<u8>, pic2_mask: Option<u8>) {
     let (mut pic_1, mut pic_2) = create_pic_structs();
 
     // We need to add a delay between writes to our PICs, especially on
@@ -81,8 +93,8 @@ pub unsafe fn initialize() {
     wait();
 
     // Restore our saved masks.
-    pic_1.data.write(saved_mask1);
-    pic_2.data.write(saved_mask2);
+    pic_1.data.write(pic1_mask.unwrap_or(saved_mask1));
+    pic_2.data.write(pic2_mask.unwrap_or(saved_mask2));
 }
 
 /// Do we handle this interrupt?
