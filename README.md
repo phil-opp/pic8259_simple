@@ -1,3 +1,10 @@
+# This is only a fork!
+
+Please file any pull requests against the original repository in https://github.com/emk/toyos-rs/tree/master/crates/pic8259_simple.
+
+
+---
+
 # Kernel-space interface to 8259 and 8259A Programmable Interrupt Controller (PIC)
 
 **Work in progress:** I am _not_ qualified to have written this crate.
